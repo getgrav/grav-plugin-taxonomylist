@@ -18,7 +18,7 @@ class TaxonomylistPlugin extends Plugin
     /**
      * Set needed variables to display the taxonomy list.
      */
-    public function onAfterSiteTwigVars()
+    public function onAfterTwigSiteVars()
     {
         require_once __DIR__ . '/classes/taxonomylist.php';
 
