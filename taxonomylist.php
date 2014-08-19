@@ -1,18 +1,28 @@
 <?php
 namespace Grav\Plugin;
 
-use \Grav\Common\Plugin;
-use \Grav\Common\Registry;
-use \Grav\Plugin\Taxonomylist;
+use Grav\Common\Plugin;
+use Grav\Plugin\Taxonomylist;
 
 class TaxonomylistPlugin extends Plugin
 {
+
+    /**
+     * @return array
+     */
+    public static function getSubscribedEvents() {
+        return [
+            'onAfterTwigTemplatesPaths' => ['onAfterTwigTemplatesPaths', 0],
+            'onAfterTwigSiteVars' => ['onAfterTwigSiteVars', 0]
+        ];
+    }
+
     /**
      * Add current directory to twig lookup paths.
      */
     public function onAfterTwigTemplatesPaths()
     {
-        Registry::get('Twig')->twig_paths[] = __DIR__ . '/templates';
+        $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
     }
 
     /**
@@ -22,7 +32,7 @@ class TaxonomylistPlugin extends Plugin
     {
         require_once __DIR__ . '/classes/taxonomylist.php';
 
-        $twig = Registry::get('Twig');
+        $twig = $this->grav['twig'];
         $twig->twig_vars['taxonomylist'] = new Taxonomylist();
         $twig->twig_vars['list_url'] = $this->config->get(
             'site.blog.route',
