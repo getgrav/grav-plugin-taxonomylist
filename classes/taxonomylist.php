@@ -1,10 +1,12 @@
 <?php
 namespace Grav\Plugin;
 
-use \Grav\Common\Registry;
+use Grav\Common\GravTrait;
 
 class Taxonomylist
 {
+    use GravTrait;
+
     /**
      * @var array
      */
@@ -28,7 +30,7 @@ class Taxonomylist
      */
     protected function build()
     {
-        $taxonomylist = Registry::get('Taxonomy')->taxonomy();
+        $taxonomylist = self::$grav['taxonomy']->taxonomy();
         foreach ($taxonomylist as $x => $y) {
             foreach ($taxonomylist[$x] as $key => $value) {
                 $taxonomylist[$x][$key] = count($value);
