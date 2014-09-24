@@ -1,6 +1,17 @@
-name: Taxonomy List Plugin
-version: 1.0.0
-description: This is a basic taxonomy list plugin for Grav.
+name: Taxonomy List
+version: 1.1.0
+description: "With the **TaxonomyList plugin** you can easily create list of **taxonomy** items such as **tags**, **categories**, etc."
+icon: tag
+author:
+  name: Team Grav
+  email: devs@getgrav.org
+  url: http://getgrav.org
+homepage: https://github.com/getgrav/grav-plugin-taxonomylist
+demo: http://demo.getgrav.org/blog-skeleton
+keywords: taxonomylist, plugin, taxonomy, list, tags, categories
+bugs: https://github.com/getgrav/grav-plugin-taxonomylist/issues
+license: MIT
+
 validation: strict
 
 form:
