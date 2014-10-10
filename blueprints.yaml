@@ -12,9 +12,8 @@ keywords: taxonomylist, plugin, taxonomy, list, tags, categories
 bugs: https://github.com/getgrav/grav-plugin-taxonomylist/issues
 license: MIT
 
-validation: strict
-
 form:
+  validation: strict
   fields:
     enabled:
       type: toggle
