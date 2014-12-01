@@ -10,11 +10,10 @@ class TaxonomylistPlugin extends Plugin
     /**
      * @return array
      */
-    public static function getSubscribedEvents() {
+    public static function getSubscribedEvents()
+    {
         return [
-            'onPluginsInitialized' => ['onPluginsInitialized', 0],
-            'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
-            'onTwigSiteVariables' => ['onTwigSiteVariables', 0]
+            'onPluginsInitialized' => ['onPluginsInitialized', 0]
         ];
     }
 
@@ -25,7 +24,13 @@ class TaxonomylistPlugin extends Plugin
     {
         if ($this->isAdmin()) {
             $this->active = false;
+            return;
         }
+
+        $this->enable([
+            'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
+            'onTwigSiteVariables' => ['onTwigSiteVariables', 0]
+        ]);
     }
 
     /**
@@ -33,8 +38,6 @@ class TaxonomylistPlugin extends Plugin
      */
     public function onTwigTemplatePaths()
     {
-        if (!$this->active) return;
-
         $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
     }
 
@@ -43,8 +46,6 @@ class TaxonomylistPlugin extends Plugin
      */
     public function onTwigSiteVariables()
     {
-        if (!$this->active) return;
-
         require_once __DIR__ . '/classes/taxonomylist.php';
 
         $twig = $this->grav['twig'];
