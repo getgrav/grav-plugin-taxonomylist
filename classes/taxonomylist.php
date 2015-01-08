@@ -31,12 +31,16 @@ class Taxonomylist
     protected function build()
     {
         $taxonomylist = self::$grav['taxonomy']->taxonomy();
+        $newlist = [];
         foreach ($taxonomylist as $x => $y) {
+            $partial = [];
             foreach ($taxonomylist[$x] as $key => $value) {
-                $taxonomylist[$x][$key] = count($value);
+                $taxonomylist[$x][strval($key)] = count($value);
+                $partial[strval($key)] = count($value);
             }
-            array_multisort($taxonomylist[$x], SORT_DESC, SORT_NUMERIC);
+            arsort($partial);
+            $newlist[$x] = $partial;
         }
-        $this->taxonomylist = $taxonomylist;
+        $this->taxonomylist = $newlist;
     }
 }
