@@ -1,3 +1,9 @@
+# v1.2.2
+## 01/09/2015
+
+2. [](#improved)
+    * NOTE: BREAKING CHANGE: Moved templates into `partials/` subfolder for consistency.
+
 # v1.2.1
 ## 01/07/2015
 
