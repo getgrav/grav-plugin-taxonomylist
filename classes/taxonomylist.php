@@ -30,7 +30,7 @@ class Taxonomylist
      */
     protected function build()
     {
-        $taxonomylist = self::$grav['taxonomy']->taxonomy();
+        $taxonomylist = self::getGrav()['taxonomy']->taxonomy();
         $newlist = [];
         foreach ($taxonomylist as $x => $y) {
             $partial = [];
