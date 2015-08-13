@@ -4,9 +4,9 @@
 
 <span class="tags">
     {% for tax,value in taxlist[taxonomy] %}
-
-        <a href="{{ base_url }}/{{ taxonomy }}{{ config.system.param_sep }}{{ tax|e('url') }}">{{ tax }}</a>
-
+        {% if tax|length %}
+            <a href="{{ base_url }}/{{ taxonomy }}{{ config.system.param_sep }}{{ tax|e('url') }}">{{ tax }}</a>
+        {% endif %}
     {% endfor %}
 </span>
 {% endif %}
