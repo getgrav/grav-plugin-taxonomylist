@@ -1,3 +1,9 @@
+# v1.2.7
+## 01/06/2016
+
+2. [](#improved)
+    * Removed extraneous encoding
+
 # v1.2.6
 ## 10/07/2015
 
