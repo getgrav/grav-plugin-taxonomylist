@@ -1,3 +1,12 @@
+# v1.3.0
+## 10/31/2017
+
+1. [](#new)
+    * Added ability to show tags of the child pages of the current page [#17](https://github.com/getgrav/grav-plugin-taxonomylist/pull/17)
+1. [](#improved)
+    * Improved child-pages logic to use the same include, just pass an optional `children_only` param
+    * Lowercase all tags due to changes in Grav 1.3.8 where URL params are lowercase [#18](https://github.com/getgrav/grav-plugin-taxonomylist/issues/18) 
+
 # v1.2.7
 ## 01/06/2016
 

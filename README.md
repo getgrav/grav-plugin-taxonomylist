@@ -30,13 +30,33 @@ You should now have all the plugin files under
 
 To use `taxonomylist` you need to set your pages header with a  taxonomy category and tag:
 
-```
+```yaml
 taxonomy:
     category: blog
     tag: [tag1, tag2]
 ```
 
+## Simple Include
+
+The plugin provides a Twig template that you need to include in your theme. Something like:
+
+```twig
+{% include 'partials/taxonomylist.html.twig' with {base_url: my_url, taxonomy: 'tag'} %}
+```
+
+Where `my_url` is the URL to link to where the collection can be filtered (e.g. `/blog`) and the `taxonomy` points to a specific taxonomy type to display (e.g. `tag`). This will display all tags throughout your site
+
+## Child-only Include
+
+You can also include pass an optional parameter that will show taxonomy for child-pages only:
+
+```twig
+{% include 'partials/taxonomylist.html.twig' with {base_url: my_url, taxonomy: 'tag', children_only: true} %}
+```
+
 > NOTE: If you want to see this plugin in action, have a look at our [Blog Site Skeleton](http://github.com/grav/grav-skeleton-blog-site/archive/master.zip)
+
+
 
 # Config Defaults
 ```
