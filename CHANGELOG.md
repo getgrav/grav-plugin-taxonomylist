@@ -1,3 +1,9 @@
+# v1.3.1
+## 11/02/2017
+
+1. [](#bugfix)
+    * Don't need to lowercase the taxonomy now we have removed `case_insensitive_urls` option in Grav core
+
 # v1.3.0
 ## 10/31/2017
 
