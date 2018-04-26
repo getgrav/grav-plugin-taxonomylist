@@ -26,12 +26,12 @@ class Taxonomylist
 
     /**
      * Get taxonomy list with only tags of the child pages.
-     * 
+     *
      * @return array
      */
     public function getChildPagesTags()
     {
-        $current = self::getGrav()['page'];
+        $current = Grav::instance()['page'];
         $taxonomies = [];
         foreach ($current->children() as $child) {
             foreach($this->build($child->taxonomy()) as $taxonomyName => $taxonomyValue) {
