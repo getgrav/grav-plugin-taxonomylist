@@ -2,12 +2,10 @@
 
 namespace Grav\Plugin;
 
-use Grav\Common\GravTrait;
+use Grav\Common\Grav;
 
 class Taxonomylist
 {
-    use GravTrait;
-
     /**
      * @var array
      */
@@ -21,19 +19,19 @@ class Taxonomylist
     public function get()
     {
         if (!$this->taxonomylist) {
-            $this->taxonomylist = $this->build(self::getGrav()['taxonomy']->taxonomy());
+            $this->taxonomylist = $this->build(Grav::instance()['taxonomy']->taxonomy());
         }
         return $this->taxonomylist;
     }
 
     /**
      * Get taxonomy list with only tags of the child pages.
-     * 
+     *
      * @return array
      */
     public function getChildPagesTags()
     {
-        $current = self::getGrav()['page'];
+        $current = Grav::instance()['page'];
         $taxonomies = [];
         foreach ($current->children() as $child) {
             foreach($this->build($child->taxonomy()) as $taxonomyName => $taxonomyValue) {
@@ -61,7 +59,7 @@ class Taxonomylist
      */
     protected function build(array $taxonomylist)
     {
-        $cache = self::getGrav()['cache'];
+        $cache = Grav::instance()['cache'];
         $hash = hash('md5', serialize($taxonomylist));
         $list = [];
 
