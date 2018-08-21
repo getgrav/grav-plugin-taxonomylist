@@ -63,7 +63,7 @@ class Taxonomylist
         $hash = hash('md5', serialize($taxonomylist));
         $list = [];
 
-        if ($taxonomy = $cache->fetch($hash . 'x')) {
+        if ($taxonomy = $cache->fetch($hash)) {
             return $taxonomy;
         } else {
             foreach ($taxonomylist as $taxonomyName => $taxonomyValue) {
