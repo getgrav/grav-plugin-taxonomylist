@@ -32,3 +32,10 @@ form:
       placeholder: /blog
       validate:
         pattern: "/([a-z\-_]+/?)+"
+
+    limit:
+      type: number
+      label: Tag limit
+      min: 0
+      default: 0
+      placeholder: 0
