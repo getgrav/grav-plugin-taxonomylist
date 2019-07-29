@@ -33,7 +33,7 @@ class Taxonomylist
     {
         $current = Grav::instance()['page'];
         $taxonomies = [];
-        foreach ($current->children() as $child) {
+        foreach ($current->children()->published() as $child) {
             foreach($this->build($child->taxonomy()) as $taxonomyName => $taxonomyValue) {
                 if (!isset($taxonomies[$taxonomyName])) {
                     $taxonomies[$taxonomyName] = $taxonomyValue;
