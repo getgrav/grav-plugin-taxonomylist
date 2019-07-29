@@ -1,10 +1,13 @@
 {% set taxlist = children_only is defined ? taxonomylist.getChildPagesTags() : taxonomylist.get() %}
+{% set limit = config.plugins.taxonomylist.limit %}
 
 {% if taxlist %}
 <span class="tags">
-    {% for tax,value in taxlist[taxonomy] %}
-        {% set active = uri.param(taxonomy) == tax? 'active' : '' %}
-        <a class="{{ active }}" href="{{ base_url }}/{{ taxonomy }}{{ config.system.param_sep }}{{ tax }}">{{ tax }}</a>
+    {% set count = 0 %}
+    {% for tax,value in taxlist[taxonomy] if count < limit %}
+        {% set label_class = uri.param(taxonomy) == tax ? 'label-primary' : 'label-secondary' %}
+        <a class="label label-rounded {{ label_class }}" title="{{ tax }}" href="{{ base_url_absolute }}/{{ taxonomy }}{{ config.system.param_sep }}{{ tax }}">{{ tax }}</a>
+        {% set count = count +  1 %}
     {% endfor %}
 </span>
 {% endif %}
