@@ -31,4 +31,4 @@ form:
       label: Route to blog
       placeholder: /blog
       validate:
-        pattern: "/([a-z\-_]+/?)+"
+        pattern: '/([a-z\-_]+/?)+'
