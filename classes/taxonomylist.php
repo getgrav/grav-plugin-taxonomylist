@@ -26,19 +26,25 @@ class Taxonomylist
 
     /**
      * Get taxonomy list with only tags of the child pages.
-     *
+     * @param type $child_only // will recurs through all descedants if set to false
+     * @param type $current // page to start with
+     * @param array $taxonomies //array to feed with tags
      * @return array
      */
-    public function getChildPagesTags()
+    public function getChildPagesTags( $child_only=true, $current=null , array &$taxonomies=[] )
     {
-        $current = Grav::instance()['page'];
-        $taxonomies = [];
-        foreach ($current->children()->published() as $child) {
+        if(is_null($current))
+        {
+            $current = Grav::instance()['page'];
+        }
+        foreach ( $current->children()->published() as $child) 
+        {
             foreach($this->build($child->taxonomy()) as $taxonomyName => $taxonomyValue) {
                 if (!isset($taxonomies[$taxonomyName])) {
                     $taxonomies[$taxonomyName] = $taxonomyValue;
                 } else {
                     foreach ($taxonomyValue as $value => $count) {
+                        
                         if (!isset($taxonomies[$taxonomyName][$value])) {
                             $taxonomies[$taxonomyName][$value] = $count;
                         } else {
@@ -47,8 +53,10 @@ class Taxonomylist
                     }
                 }
             }
+           // recurse
+            if(!$child_only) $this->getChildPagesTags($child_only, $child, $taxonomies);
         }
-
+        array_multisort( $taxonomies );
         return $taxonomies;
     }
 
