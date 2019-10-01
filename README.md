@@ -46,12 +46,26 @@ The plugin provides a Twig template that you need to include in your theme. Some
 
 Where `my_url` is the URL to link to where the collection can be filtered (e.g. `/blog`) and the `taxonomy` points to a specific taxonomy type to display (e.g. `tag`). This will display all tags throughout your site
 
-## Child-only Include
+## Child-only or descendants Include
 
-You can also include pass an optional parameter that will show taxonomy for child-pages only:
+You can also include pass an optional parameter that will show taxonomy for child-pages only if set to true, or for all page's descendants if set to false:
 
+### Show only page first level childs taxonomy
 ```twig
+//children_only set to true
 {% include 'partials/taxonomylist.html.twig' with {base_url: my_url, taxonomy: 'tag', children_only: true} %}
+```
+### Show all page's descendants taxonomies
+```twig
+//children_only set to false
+{% include 'partials/taxonomylist.html.twig' with {base_url: my_url, taxonomy: 'tag', children_only: false} %}
+```
+
+### Show all site wide taxonomies 
+```twig
+//children_only not set
+{% include 'partials/taxonomylist.html.twig' with {base_url: my_url, taxonomy: 'tag'} %}
+
 ```
 
 > NOTE: If you want to see this plugin in action, have a look at our [Blog Site Skeleton](http://github.com/grav/grav-skeleton-blog-site/archive/master.zip)
