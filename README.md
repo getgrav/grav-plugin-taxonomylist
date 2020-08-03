@@ -54,7 +54,7 @@ You can also include pass an optional parameter that will show taxonomy for chil
 {% include 'partials/taxonomylist.html.twig' with {base_url: my_url, taxonomy: 'tag', children_only: true} %}
 ```
 
-> NOTE: If you want to see this plugin in action, have a look at our [Blog Site Skeleton](http://github.com/grav/grav-skeleton-blog-site/archive/master.zip)
+> NOTE: If you want to see this plugin in action, have a look at our [Blog Site Skeleton](https://github.com/getgrav/grav-skeleton-blog-site/archive/master.zip)
 
 
 
