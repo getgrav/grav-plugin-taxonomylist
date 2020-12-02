@@ -2,7 +2,9 @@
 
 namespace Grav\Plugin;
 
+use Grav\Common\Cache;
 use Grav\Common\Grav;
+use Grav\Common\Page\Interfaces\PageInterface;
 
 class Taxonomylist
 {
@@ -18,9 +20,10 @@ class Taxonomylist
      */
     public function get()
     {
-        if (!$this->taxonomylist) {
+        if (null === $this->taxonomylist) {
             $this->taxonomylist = $this->build(Grav::instance()['taxonomy']->taxonomy());
         }
+
         return $this->taxonomylist;
     }
 
@@ -31,9 +34,13 @@ class Taxonomylist
      */
     public function getChildPagesTags()
     {
+        /** @var PageInterface $current */
         $current = Grav::instance()['page'];
         $taxonomies = [];
         foreach ($current->children()->published() as $child) {
+            if (!$child->isPage()) {
+                continue;
+            }
             foreach($this->build($child->taxonomy()) as $taxonomyName => $taxonomyValue) {
                 if (!isset($taxonomies[$taxonomyName])) {
                     $taxonomies[$taxonomyName] = $taxonomyValue;
@@ -59,30 +66,32 @@ class Taxonomylist
      */
     protected function build(array $taxonomylist)
     {
+        /** @var Cache $cache */
         $cache = Grav::instance()['cache'];
         $hash = hash('md5', serialize($taxonomylist));
         $list = [];
 
         if ($taxonomy = $cache->fetch($hash)) {
             return $taxonomy;
-        } else {
-            foreach ($taxonomylist as $taxonomyName => $taxonomyValue) {
-                $partial = [];
-                foreach ($taxonomyValue as $key => $value) {
-                    if (is_array($value)) {
-                        $taxonomyValue[strval($key)] = count($value);
-                        $partial[strval($key)] = count($value);
-                    } else {
-                        $partial[strval($value)] = 1;
-                    }
-                }
-                arsort($partial);
-                $list[$taxonomyName] = $partial;
-            }
-
-            $cache->save($hash, $list);
-
-            return $list;
         }
+
+        foreach ($taxonomylist as $taxonomyName => $taxonomyValue) {
+            $partial = [];
+            foreach ($taxonomyValue as $key => $value) {
+                if (is_array($value)) {
+                    $key = (string)$key;
+                    $taxonomyValue[$key] = count($value);
+                    $partial[$key] = count($value);
+                } else {
+                    $partial[(string)$value] = 1;
+                }
+            }
+            arsort($partial);
+            $list[$taxonomyName] = $partial;
+        }
+
+        $cache->save($hash, $list);
+
+        return $list;
     }
 }

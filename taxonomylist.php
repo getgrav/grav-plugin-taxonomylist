@@ -1,8 +1,8 @@
 <?php
 namespace Grav\Plugin;
 
+use Composer\Autoload\ClassLoader;
 use Grav\Common\Plugin;
-use Grav\Plugin\Taxonomylist;
 
 class TaxonomylistPlugin extends Plugin
 {
@@ -10,11 +10,24 @@ class TaxonomylistPlugin extends Plugin
     /**
      * @return array
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
-            'onPluginsInitialized' => ['onPluginsInitialized', 0]
+            'onPluginsInitialized' => [
+                ['autoload', 100000],
+                ['onPluginsInitialized', 0]
+            ]
         ];
+    }
+
+    /**
+     * [PluginsLoadedEvent:100000] Composer autoload.
+     *
+     * @return ClassLoader
+     */
+    public function autoload(): ClassLoader
+    {
+        return require __DIR__ . '/vendor/autoload.php';
     }
 
     /**
@@ -46,8 +59,6 @@ class TaxonomylistPlugin extends Plugin
      */
     public function onTwigSiteVariables()
     {
-        require_once __DIR__ . '/classes/taxonomylist.php';
-
         $twig = $this->grav['twig'];
         $twig->twig_vars['taxonomylist'] = new Taxonomylist();
         $twig->twig_vars['list_url'] = $this->config->get(

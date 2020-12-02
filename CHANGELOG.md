@@ -1,3 +1,11 @@
+# v1.3.5
+## mm/dd/2020
+
+1. [](#new)
+    * Requires **Grav 1.6**
+1. [](#bugfix)
+    * Exclude empty folders from taxonomy
+
 # v1.3.4
 ## 08/03/2020
 
