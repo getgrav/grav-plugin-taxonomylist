@@ -1,3 +1,12 @@
+# v1.3.5
+## 12/02/2020
+
+1. [](#new)
+    * Requires **Grav 1.6**
+    * Pass phpstan level 8 tests
+1. [](#bugfix)
+    * Exclude empty folders from taxonomy
+
 # v1.3.4
 ## 08/03/2020
 
