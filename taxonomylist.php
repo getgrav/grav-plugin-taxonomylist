@@ -32,6 +32,8 @@ class TaxonomylistPlugin extends Plugin
 
     /**
      * Initialize configuration
+     *
+     * @return void
      */
     public function onPluginsInitialized()
     {
@@ -48,6 +50,8 @@ class TaxonomylistPlugin extends Plugin
 
     /**
      * Add current directory to twig lookup paths.
+     *
+     * @return void
      */
     public function onTwigTemplatePaths()
     {
@@ -56,6 +60,8 @@ class TaxonomylistPlugin extends Plugin
 
     /**
      * Set needed variables to display the taxonomy list.
+     *
+     * @return void
      */
     public function onTwigSiteVariables()
     {

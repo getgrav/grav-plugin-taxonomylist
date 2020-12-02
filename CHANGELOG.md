@@ -3,6 +3,7 @@
 
 1. [](#new)
     * Requires **Grav 1.6**
+    * Pass phpstan level 8 tests
 1. [](#bugfix)
     * Exclude empty folders from taxonomy
 
