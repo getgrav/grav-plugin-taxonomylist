@@ -32,10 +32,13 @@ class Taxonomylist
      *
      * @return array
      */
-    public function getChildPagesTags()
+    public function getChildPagesTags(PageInterface $current = null)
     {
         /** @var PageInterface $current */
-        $current = Grav::instance()['page'];
+        if (null === $current) {
+            $current = Grav::instance()['page'];
+        }
+
         $taxonomies = [];
         foreach ($current->children()->published() as $child) {
             if (!$child->isPage()) {
