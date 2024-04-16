@@ -1,3 +1,9 @@
+# v1.3.6
+## 04/16/2024
+
+1. [](#new)
+   * Specify the page from which to get the child tags [#39](https://github.com/getgrav/grav-plugin-taxonomylist/issues/39)
+
 # v1.3.5
 ## 12/02/2020
 

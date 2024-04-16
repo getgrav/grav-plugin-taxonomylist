@@ -54,6 +54,13 @@ You can also include pass an optional parameter that will show taxonomy for chil
 {% include 'partials/taxonomylist.html.twig' with {base_url: my_url, taxonomy: 'tag', children_only: true} %}
 ```
 
+When using `children_only`, another optional parameter (`of_page`) may be used to specify the page to use:
+
+```twig
+{% include 'partials/taxonomylist.html.twig' with {base_url: my_url, taxonomy: 'tag', children_only: true, of_page: page.parent} %}
+```
+
+
 > NOTE: If you want to see this plugin in action, have a look at our [Blog Site Skeleton](https://github.com/getgrav/grav-skeleton-blog-site/archive/master.zip)
 
 
