@@ -63,6 +63,44 @@ class Taxonomylist
     }
 
     /**
+     * Get taxonomy list with tags of all descendant pages.
+     *
+     * @return array
+     */
+    public function getDescendantPagesTags(PageInterface $current = null)
+    {
+        /** @var PageInterface $current */
+        if (null === $current) {
+            $current = Grav::instance()['page'];
+        }
+
+	    $pages = Grav::instance()['pages'];
+		$descendants = $pages->all($current)->remove($current->path())->pages();
+
+        $taxonomies = [];
+        foreach ($descendants->published() as $child) {
+            if (!$child->isPage()) {
+                continue;
+            }
+            foreach($this->build($child->taxonomy()) as $taxonomyName => $taxonomyValue) {
+                if (!isset($taxonomies[$taxonomyName])) {
+                    $taxonomies[$taxonomyName] = $taxonomyValue;
+                } else {
+                    foreach ($taxonomyValue as $value => $count) {
+                        if (!isset($taxonomies[$taxonomyName][$value])) {
+                            $taxonomies[$taxonomyName][$value] = $count;
+                        } else {
+                            $taxonomies[$taxonomyName][$value] += $count;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $taxonomies;
+    }
+
+    /**
      * @internal
      * @param array $taxonomylist
      * @return array
