@@ -44,19 +44,7 @@ class Taxonomylist
             if (!$child->isPage()) {
                 continue;
             }
-            foreach($this->build($child->taxonomy()) as $taxonomyName => $taxonomyValue) {
-                if (!isset($taxonomies[$taxonomyName])) {
-                    $taxonomies[$taxonomyName] = $taxonomyValue;
-                } else {
-                    foreach ($taxonomyValue as $value => $count) {
-                        if (!isset($taxonomies[$taxonomyName][$value])) {
-                            $taxonomies[$taxonomyName][$value] = $count;
-                        } else {
-                            $taxonomies[$taxonomyName][$value] += $count;
-                        }
-                    }
-                }
-            }
+            $taxonomies = $this->mergeTaxonomies($taxonomies, $this->build($child->taxonomy()));
         }
 
         return $taxonomies;
@@ -74,27 +62,15 @@ class Taxonomylist
             $current = Grav::instance()['page'];
         }
 
-	    $pages = Grav::instance()['pages'];
-		$descendants = $pages->all($current)->remove($current->path())->pages();
+        $pages = Grav::instance()['pages'];
+        $descendants = $pages->all($current)->remove($current->path())->pages();
 
         $taxonomies = [];
         foreach ($descendants->published() as $child) {
             if (!$child->isPage()) {
                 continue;
             }
-            foreach($this->build($child->taxonomy()) as $taxonomyName => $taxonomyValue) {
-                if (!isset($taxonomies[$taxonomyName])) {
-                    $taxonomies[$taxonomyName] = $taxonomyValue;
-                } else {
-                    foreach ($taxonomyValue as $value => $count) {
-                        if (!isset($taxonomies[$taxonomyName][$value])) {
-                            $taxonomies[$taxonomyName][$value] = $count;
-                        } else {
-                            $taxonomies[$taxonomyName][$value] += $count;
-                        }
-                    }
-                }
-            }
+            $taxonomies = $this->mergeTaxonomies($taxonomies, $this->build($child->taxonomy()));
         }
 
         return $taxonomies;
@@ -134,5 +110,30 @@ class Taxonomylist
         $cache->save($hash, $list);
 
         return $list;
+    }
+
+    /**
+     * Merge two taxonomy arrays.
+     *
+     * @param array $taxonomies
+     * @param array $newTaxonomies
+     * @return array
+     */
+    private function mergeTaxonomies(array $taxonomies, array $newTaxonomies)
+    {
+        foreach ($newTaxonomies as $taxonomyName => $taxonomyValue) {
+            if (!isset($taxonomies[$taxonomyName])) {
+                $taxonomies[$taxonomyName] = $taxonomyValue;
+            } else {
+                foreach ($taxonomyValue as $value => $count) {
+                    if (!isset($taxonomies[$taxonomyName][$value])) {
+                        $taxonomies[$taxonomyName][$value] = $count;
+                    } else {
+                        $taxonomies[$taxonomyName][$value] += $count;
+                    }
+                }
+            }
+        }
+        return $taxonomies;
     }
 }
