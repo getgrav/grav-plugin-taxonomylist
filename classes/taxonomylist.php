@@ -32,7 +32,7 @@ class Taxonomylist
      *
      * @return array
      */
-    public function getChildPagesTags(PageInterface $current = null)
+    public function getChildPagesTags(?PageInterface $current = null)
     {
         /** @var PageInterface $current */
         if (null === $current) {
