@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInite611d11e84f56d74cb80353137f35dff
 {
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Grav\\Plugin\\Taxonomylist' => __DIR__ . '/../..' . '/classes/taxonomylist.php',
         'Grav\\Plugin\\TaxonomylistPlugin' => __DIR__ . '/../..' . '/taxonomylist.php',
     );
