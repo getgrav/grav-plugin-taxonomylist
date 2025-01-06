@@ -1,3 +1,10 @@
+# v1.4.0
+## 01/06/2025
+
+1. [](#new)
+   * PHP 8.4 compatibility support
+   * Added ability for page descendant taxonomy [#31](https://github.com/getgrav/grav-plugin-taxonomylist/pull/31)
+
 # v1.3.6
 ## 04/16/2024
 

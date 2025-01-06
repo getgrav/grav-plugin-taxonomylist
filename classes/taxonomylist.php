@@ -32,15 +32,14 @@ class Taxonomylist
      *
      * @return array
      */
-    public function getChildPagesTags(PageInterface $current = null)
+    public function getChildPagesTags(?PageInterface $page = null, bool $child_only = true, array $taxonomies= [])
     {
-        /** @var PageInterface $current */
-        if (null === $current) {
-            $current = Grav::instance()['page'];
+        /** @var PageInterface $page */
+        if (null === $page) {
+            $page = Grav::instance()['page'];
         }
 
-        $taxonomies = [];
-        foreach ($current->children()->published() as $child) {
+        foreach ($page->children()->published() as $child) {
             if (!$child->isPage()) {
                 continue;
             }
@@ -56,8 +55,12 @@ class Taxonomylist
                         }
                     }
                 }
+                if(!$child_only && $child->children()->count() > 0) {
+                    $taxonomies = $this->getChildPagesTags($child, $child_only, $taxonomies);
+                }
             }
         }
+        array_multisort($taxonomies);
 
         return $taxonomies;
     }
