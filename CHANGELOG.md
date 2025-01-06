@@ -1,5 +1,5 @@
 # v1.4.0
-## mm/dd/2025
+## 01/06/2025
 
 1. [](#new)
    * PHP 8.4 compatibility support
