@@ -1,3 +1,9 @@
+# v1.4.1
+## 05/01/2026
+
+1. [](#improved)
+    * Added 1.7|2.0 compatibility flags
+
 # v1.4.0
 ## 01/06/2025
 
