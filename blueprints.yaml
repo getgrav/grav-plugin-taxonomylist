@@ -1,7 +1,7 @@
 name: Taxonomy List
 type: plugin
 slug: taxonomylist
-version: 1.4.1
+version: 1.4.2
 description: "With the **TaxonomyList plugin** you can easily create list of **taxonomy** items such as **tags**, **categories**, etc."
 icon: tag
 author:
@@ -40,3 +40,15 @@ form:
       placeholder: /blog
       validate:
         pattern: '/([a-z\-_]+/?)+'
+
+    respect_access:
+      type: toggle
+      label: Respect access rules
+      help: 'When enabled, the site-wide taxonomy list only counts pages the current visitor is authorized to see. Requires the Login plugin. This loads and authorizes every tagged page, and counts are cached per-visitor.'
+      highlight: 0
+      default: 0
+      options:
+        1: Enabled
+        0: Disabled
+      validate:
+        type: bool
