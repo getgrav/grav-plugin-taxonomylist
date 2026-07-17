@@ -1,3 +1,9 @@
+# v1.4.3
+## 07/17/2026
+
+1. [](#bugfix)
+    * Child page tags are now sorted by frequency so themes show the most-used tags first [#219](https://github.com/getgrav/grav-theme-quark/issues/219)
+
 # v1.4.2
 ## 06/11/2026
 
