@@ -72,7 +72,13 @@ class Taxonomylist
                 }
             }
         }
-        array_multisort($taxonomies);
+        // Sort each taxonomy's values by frequency (most used first), matching the
+        // order that get() produces via build(). Merging child counts above leaves
+        // the values in page-discovery order, so re-sort here rather than relying on
+        // array_multisort(), which only reordered the outer taxonomy array.
+        foreach (array_keys($taxonomies) as $taxonomyName) {
+            arsort($taxonomies[$taxonomyName]);
+        }
 
         return $taxonomies;
     }
